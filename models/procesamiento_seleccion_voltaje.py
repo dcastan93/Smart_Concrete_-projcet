@@ -78,9 +78,16 @@ def main(raw_path, raw_path_1, file_save, n_rep, fig_save):
                 data_ext = (df_ext.iloc[n_centro])
                 corriente = (data_ext/2200).reset_index(drop = True)
                 resistencia = data_cen/ corriente
-                resistencia_mean = resistencia.mean()
-                resistencia_std = resistencia.std()
                 
+                
+                if n_rep == 1:
+                    resistencia_mean = resistencia.copy()
+                    resistencia_std = resistencia.copy()   
+                
+                else:
+                    resistencia_mean = resistencia.mean()
+                    resistencia_std = resistencia.std()
+                    
                 
                 test_cen_mean.append(resistencia_mean) 
                 test_cen_std.append(resistencia_std)
@@ -134,10 +141,10 @@ def main(raw_path, raw_path_1, file_save, n_rep, fig_save):
 #%%
 if __name__ == '__main__':
     
-    raw_path = '/data/Interim/1_Hz/*.csv'
-    raw_path_1 = '/data/Processed/1_Hz/*.csv'
-    file_save = '/data/processed/1_Hz'
+    raw_path = '/data/Interim/1_Hz_4/*.csv'
+    raw_path_1 = '/data/Processed/1_Hz_4/*.csv'
+    file_save = '/data/processed/1_Hz_4'
     n_rep = 5
-    fig_save = '/reports/figures/1_Hz'
+    fig_save = '/reports/figures/1_Hz_4'
 
     main(raw_path, raw_path_1, file_save, n_rep, fig_save) 

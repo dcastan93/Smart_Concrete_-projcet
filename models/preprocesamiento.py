@@ -21,9 +21,6 @@ import logging
 import pandas as pd
 import datetime as dt
 
-from sklearn.pipeline import Pipeline
-from sklearn.externals import joblib
-from sklearn.ensemble import GradientBoostingClassifier
 import glob
 
 import models.funciones_esenciales as funciones
@@ -44,14 +41,44 @@ logging.basicConfig(level=logging.DEBUG,
 
 
 #%%
-def main(raw_path, interim_path, n_rep, n_datos):
+def main(raw_path, interim_path, n_rep, n_datos, raw_path_1):
     
+    all_files = glob.glob(base_path + raw_path)
+    read_csv = []
+    count = 0
+    contador=0
+    contador1 = n_rep
+    while contador <= len(all_files):
+        count = 0
+        read_csv = []
+        folder = all_files[contador:contador1]
+        for i in folder:
+            
+        
+            file_name = str(i)
+            Folder_name = os.path.dirname(i)
+            path_list = Folder_name.split(os.sep)
+            name = path_list[7]
+            name = '/' + str(name)+'_'+ str(count)
+            save = '/' + path_list[6]
+            
+            folder_save = '/' +path_list[5]
+            df = (pd.read_csv(i))
+            df.to_csv(os.path.join(base_path + interim_path + folder_save + save + name +'.csv'),  index = False, sep=',')
+       
+            count = count+1
+        
+        contador=contador + n_rep
+        contador1 = contador1 + n_rep
+    
+    
+ 
     
     logger.info('seleccionando los archivos .csv')
-    all_files = glob.glob(base_path + raw_path)
+    all_files = glob.glob(base_path + raw_path_1)
     logger.info('se seleccionaron srt(all_files) archivos')
     for i in all_files:
-        break
+        
         file_name = str(i)
         file_save = os.path.dirname(i)
         df = (pd.read_csv(i))
@@ -88,7 +115,7 @@ def main(raw_path, interim_path, n_rep, n_datos):
         
         
 
-    all_files = glob.glob(base_path + raw_path)
+    all_files = glob.glob(base_path + raw_path_1)
     read_csv = []
     count = 0
     contador=0
@@ -98,8 +125,7 @@ def main(raw_path, interim_path, n_rep, n_datos):
         read_csv = []
         folder = all_files[contador:contador1]
         for i in folder:
-        
-        
+            
             file_name = str(i)
             Folder_name = os.path.dirname(i)
             Folder_name = os.path.basename(Folder_name)
@@ -134,9 +160,11 @@ def main(raw_path, interim_path, n_rep, n_datos):
 #%%
 if __name__ == '__main__':
     
-    raw_path = '/data/Interim/1_Hz/**/**/*.csv'
-    interim_path = '/data/Interim/1_Hz'
-    n_rep = 5
+    raw_path = '/data/Interim/1_Hz_4/**/**/**/*.csv'
+    raw_path_1 = '/data/Interim/1_Hz_4/**/**/*.csv'
+    file = '1_Hz_2'
+    interim_path = '/data/Interim/1_Hz_4'
+    n_rep = 1
     n_datos = 25
 
-    main(raw_path, interim_path, n_rep, n_datos)
+    main(raw_path, interim_path, n_rep, n_datos, raw_path_1)
