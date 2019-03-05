@@ -52,11 +52,12 @@ def main(raw_path, raw_path_1, file_save, n_rep, fig_save):
         file_name = str(i)
         Folder_name = os.path.basename(file_name)
         df = (pd.read_csv(i))
-        for cols in df.columns.tolist()[1:]:
-            data = df.ix[df[cols] > 0]     
+        
+#        for cols in df.columns.tolist()[1:]:
+#            data = df.ix[df[cols] > 0]     
     
-        df_cen = data.filter(like='Cen')
-        df_ext = data.filter(like='Ext')
+        df_cen = df.filter(like='Cen')
+        df_ext = df.filter(like='Ext')
 
         perc = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
     
@@ -70,7 +71,7 @@ def main(raw_path, raw_path_1, file_save, n_rep, fig_save):
             test_cen_std = []
             
         
-            for i_cen in range(1,int(len(data)/25)):
+            for i_cen in range(1,int(len(df)/25)):
                 
                 t = int(perc[count]*25)
                 n_centro = t + 25*count_1
@@ -113,7 +114,7 @@ def main(raw_path, raw_path_1, file_save, n_rep, fig_save):
     all_files = glob.glob(base_path + raw_path_1)   
     
     for i in all_files:
-        
+        break
         file_name = str(i)
         Folder_name = os.path.basename(file_name)
         Folder_name = os.path.splitext(Folder_name)[0]
@@ -137,14 +138,13 @@ def main(raw_path, raw_path_1, file_save, n_rep, fig_save):
       
     
     return None
-
 #%%
 if __name__ == '__main__':
     
     raw_path = '/data/Interim/1_Hz_4/*.csv'
     raw_path_1 = '/data/Processed/1_Hz_4/*.csv'
     file_save = '/data/processed/1_Hz_4'
-    n_rep = 5
+    n_rep = 1
     fig_save = '/reports/figures/1_Hz_4'
 
     main(raw_path, raw_path_1, file_save, n_rep, fig_save) 

@@ -136,9 +136,12 @@ def main(raw_path, interim_path, n_rep, n_datos, raw_path_1):
             df = (pd.read_csv(i))
             df[V_name] = df[df.columns[[1]]]
             df = df.drop(['voltaje', 'tiempo'], axis = 1)
+            df = df[(df > 0).all(1)].reset_index(drop=True)
+            
             
             if count ==0:
                 read_csv = df
+            
             else:
                 
                 df = df[0:len(read_csv)]
@@ -160,11 +163,11 @@ def main(raw_path, interim_path, n_rep, n_datos, raw_path_1):
 #%%
 if __name__ == '__main__':
     
-    raw_path = '/data/Interim/1_Hz_4/**/**/**/*.csv'
-    raw_path_1 = '/data/Interim/1_Hz_4/**/**/*.csv'
-    file = '1_Hz_2'
-    interim_path = '/data/Interim/1_Hz_4'
-    n_rep = 1
+    raw_path = '/data/Interim/1_Hz/**/**/**/*.csv'
+    raw_path_1 = '/data/Interim/1_Hz/**/**/*.csv'
+    file = '1_Hz'
+    interim_path = '/data/Interim/1_Hz'
+    n_rep = 5
     n_datos = 25
 
     main(raw_path, interim_path, n_rep, n_datos, raw_path_1)
