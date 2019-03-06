@@ -82,25 +82,36 @@ def main(raw_path, raw_path_1, file_save, n_rep, fig_save):
                 
                 
                 if n_rep == 1:
-                    resistencia_mean = resistencia.copy()
-                    resistencia_std = resistencia.copy()   
+                    resistencia_mean = resistencia
+                    resistencia_mean = pd.Series.tolist(resistencia_mean)
+                    resistencia_mean = ''.join(map(str, resistencia_mean))
                 
                 else:
                     resistencia_mean = resistencia.mean()
                     resistencia_std = resistencia.std()
                     
-                
-                test_cen_mean.append(resistencia_mean) 
-                test_cen_std.append(resistencia_std)
-                count_1 = count_1 + 1
+                if n_rep == 1:
+                    test_cen_mean.append(resistencia_mean)
+                    
+                                
+                else:
+                    test_cen_mean.append(resistencia_mean) 
+                    test_cen_std.append(resistencia_std)
+                count_1 = count_1 + 1   
             
             name = perc[count]
             c_name_mean = 'Res_at_'+str(name)
             c_name_std = 'R_std_'+str(name)
-            test_cen_mean = pd.DataFrame({c_name_mean : test_cen_mean})
-            test_cen_std = pd.DataFrame({c_name_std : test_cen_std})
             
-            df_pro = pd.merge(test_cen_mean,test_cen_std, left_index=True, right_index=True)
+            if n_rep == 1:
+                test_cen_mean = pd.DataFrame({c_name_mean : test_cen_mean})
+                df_pro = test_cen_mean
+            
+            else:
+                 test_cen_mean = pd.DataFrame({c_name_mean : test_cen_mean})
+                 test_cen_std = pd.DataFrame({c_name_std : test_cen_std})
+                 df_pro = pd.merge(test_cen_mean,test_cen_std, left_index=True, right_index=True)
+            
             if count == 0:
                 df_save = df_pro
                 
@@ -114,16 +125,20 @@ def main(raw_path, raw_path_1, file_save, n_rep, fig_save):
     all_files = glob.glob(base_path + raw_path_1)   
     
     for i in all_files:
-        break
+
         file_name = str(i)
         Folder_name = os.path.basename(file_name)
         Folder_name = os.path.splitext(Folder_name)[0]
         df = (pd.read_csv(i))
         df_mean = df.filter(like='Res_at')
-        df_std = df.filter(like='std')
-                
-        data = np.array([np.arange(1,len(df)+1)]*len(df_mean.columns)).T    
-        data = (pd.DataFrame(data))
+#        df_std = df.filter(like='std')
+        df_medio = df_mean.mean()
+        df_standar = df_mean.std()
+        df_result =  pd.concat([df_medio, df_standar], axis=1)
+        df_result.to_csv(os.path.join(base_path + fig_save, Folder_name+'.csv'),  index = bool, sep=',')
+        
+#        data = np.array([np.arange(1,len(df)+1)]*len(df_mean.columns)).T    
+#        data = (pd.DataFrame(data))
         
         #figsize=(5,5)
         
@@ -135,6 +150,9 @@ def main(raw_path, raw_path_1, file_save, n_rep, fig_save):
         plt.xticks(rotation = 20 )
         plt.show()
         plt.savefig(os.path.join(base_path + fig_save, Folder_name+'.svg'), bbox_inches='tight')
+        plt.clf()
+        plt.cla()
+        plt.close()
       
     
     return None
@@ -145,6 +163,6 @@ if __name__ == '__main__':
     raw_path_1 = '/data/Processed/1_Hz_4/*.csv'
     file_save = '/data/processed/1_Hz_4'
     n_rep = 1
-    fig_save = '/reports/figures/1_Hz_4'
+    fig_save = '/reports/figures/Voltaje/1_Hz_4'
 
     main(raw_path, raw_path_1, file_save, n_rep, fig_save) 
