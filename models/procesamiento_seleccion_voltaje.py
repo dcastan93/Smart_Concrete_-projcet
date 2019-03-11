@@ -144,25 +144,25 @@ def main(raw_path, raw_path_1, file_save, n_rep, fig_save):
         
         df_mean.plot.box()
         plt.grid()
-        plt.ylabel('Valor de la resistencia (Ohm)')
-        plt.xlabel('Porcentaje de la onda donde se mide el voltaje')
+        plt.ylabel('Impedancia (Ohm)')
+        plt.xlabel('% de onda')
         
         plt.xticks(rotation = 20 )
         plt.show()
-        plt.savefig(os.path.join(base_path + fig_save, Folder_name+'.svg'), bbox_inches='tight')
+        plt.savefig(os.path.join(base_path + fig_save, Folder_name+'.pdf'), bbox_inches='tight')
         plt.clf()
         plt.cla()
-        plt.close()
+        plt.close() 
       
     
     return None
 #%%
 if __name__ == '__main__':
     
-    raw_path = '/data/Interim/1_Hz_4/*.csv'
-    raw_path_1 = '/data/Processed/1_Hz_4/*.csv'
-    file_save = '/data/processed/1_Hz_4'
-    n_rep = 1
-    fig_save = '/reports/figures/Voltaje/1_Hz_4'
+    raw_path = '/data/Interim/1_Hz_2/*.csv'
+    raw_path_1 = '/data/Processed/1_Hz_2/*.csv'
+    file_save = '/data/processed/1_Hz_2'
+    n_rep = 5
+    fig_save = '/reports/figures/Voltaje/1_Hz_2'
 
     main(raw_path, raw_path_1, file_save, n_rep, fig_save) 
