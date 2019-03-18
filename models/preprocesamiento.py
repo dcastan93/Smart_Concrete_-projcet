@@ -23,21 +23,20 @@ import datetime as dt
 
 import glob
 
-import models.funciones_esenciales as funciones
 
 
 #%%
-import logging
-from logging.handlers import RotatingFileHandler
-
-file_name = 'preprocesamiento'
-logger = logging.getLogger()
-dir_log = os.path.join(base_path, f'models/loggers/{file_name}.log')
-
-handler = RotatingFileHandler(dir_log, maxBytes=2000000, backupCount=10)
-logging.basicConfig(level=logging.DEBUG,
-                    format="%(asctime)s - %(process)d - %(name)s - %(levelname)s - %(message)s",
-                    handlers = [handler])
+#import logging
+#from logging.handlers import RotatingFileHandler
+#
+#file_name = 'preprocesamiento'
+#logger = logging.getLogger()
+#dir_log = os.path.join(base_path, f'models/loggers/{file_name}.log')
+#
+#handler = RotatingFileHandler(dir_log, maxBytes=2000000, backupCount=10)
+#logging.basicConfig(level=logging.DEBUG,
+#                    format="%(asctime)s - %(process)d - %(name)s - %(levelname)s - %(message)s",
+#                    handlers = [handler])
 
 
 #%%
@@ -74,9 +73,9 @@ def main(raw_path, interim_path, n_rep, n_datos, raw_path_1):
     
  
     
-    logger.info('seleccionando los archivos .csv')
+#    logger.info('seleccionando los archivos .csv')
     all_files = glob.glob(base_path + raw_path_1)
-    logger.info('se seleccionaron srt(all_files) archivos')
+#    logger.info('se seleccionaron srt(all_files) archivos')
     for i in all_files:
         
         file_name = str(i)
@@ -156,17 +155,17 @@ def main(raw_path, interim_path, n_rep, n_datos, raw_path_1):
         contador=contador + 2*n_rep
         contador1 = contador1 + 2*n_rep
         
-    logger.info("Finished program")
+#    logger.info("Finished program")
     
     return None
 
 #%%
 if __name__ == '__main__':
     
-    raw_path = '/data/Interim/1_Hz_5/**/**/**/**/*.csv'
-    raw_path_1 = '/data/Interim/1_Hz_5/**/**/*.csv'
-    file = '1_Hz_5'
-    interim_path = '/data/Interim/1_Hz_5'
+    raw_path = '/data/Interim/1_Hz_6/**/**/**/**/*.csv'
+    raw_path_1 = '/data/Interim/1_Hz_6/**/**/*.csv'
+    file = '1_Hz_6'
+    interim_path = '/data/Interim/1_Hz_6'
     n_rep = 5
     n_datos = 25
 

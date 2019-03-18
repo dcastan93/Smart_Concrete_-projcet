@@ -26,17 +26,17 @@ import matplotlib
 import matplotlib.pyplot as plt
 from adjustText import adjust_text
 #%%
-import logging
-from logging.handlers import RotatingFileHandler
-
-file_name = 'preprocesamiento'
-logger = logging.getLogger()
-dir_log = os.path.join(base_path, f'models/loggers/{file_name}.log')
-
-handler = RotatingFileHandler(dir_log, maxBytes=2000000, backupCount=10)
-logging.basicConfig(level=logging.DEBUG,
-                    format="%(asctime)s - %(process)d - %(name)s - %(levelname)s - %(message)s",
-                    handlers = [handler])
+#import logging
+#from logging.handlers import RotatingFileHandler
+#
+#file_name = 'preprocesamiento'
+#logger = logging.getLogger()
+#dir_log = os.path.join(base_path, f'models/loggers/{file_name}.log')
+#
+#handler = RotatingFileHandler(dir_log, maxBytes=2000000, backupCount=10)
+#logging.basicConfig(level=logging.DEBUG,
+#                    format="%(asctime)s - %(process)d - %(name)s - %(levelname)s - %(message)s",
+#                    handlers = [handler])
 
 
 #%%
@@ -44,7 +44,7 @@ def main(raw_path, raw_path_1, file_save, n_rep, fig_save):
 
 #lectura por porcentaje    
     
-    logger.info('seleccionando los archivos .csv')
+#    logger.info('seleccionando los archivos .csv')
     all_files = glob.glob(base_path + raw_path)
     
     for i in all_files:
@@ -159,10 +159,10 @@ def main(raw_path, raw_path_1, file_save, n_rep, fig_save):
 #%%
 if __name__ == '__main__':
     
-    raw_path = '/data/Interim/1_Hz_2/*.csv'
-    raw_path_1 = '/data/Processed/1_Hz_2/*.csv'
-    file_save = '/data/processed/1_Hz_2'
+    raw_path = '/data/Interim/1_Hz_6/*.csv'
+    raw_path_1 = '/data/Processed/1_Hz_6/*.csv'
+    file_save = '/data/processed/1_Hz_6'
     n_rep = 5
-    fig_save = '/reports/figures/Voltaje/1_Hz_2'
+    fig_save = '/reports/figures/Voltaje/1_Hz_6'
 
     main(raw_path, raw_path_1, file_save, n_rep, fig_save) 
