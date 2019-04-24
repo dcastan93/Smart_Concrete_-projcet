@@ -84,7 +84,7 @@ def main( raw_path_1, fig_save, Filter):
         extra = Rectangle((0, 0), 1, 1, fc="w", fill=False, edgecolor='none', linewidth=0)
         plt.legend([extra, extra], (text_1,text_2 ))
         plt.show()
-        plt.savefig(os.path.join(base_path + fig_save, Folder_name+'.svg'), bbox_inches='tight')
+        plt.savefig(os.path.join(base_path + fig_save, Folder_name+'.pdf'), bbox_inches='tight')
         plt.clf()
         plt.cla()
         plt.close()
@@ -93,9 +93,9 @@ def main( raw_path_1, fig_save, Filter):
 #%%
 if __name__ == '__main__':
     
-    raw_path_1 = '/data/Processed/1_Hz_3/*.csv'
+    raw_path_1 = '/data/Processed/1_Hz_6/*.csv'
  
-    fig_save = '/reports/figures/Voltaje_selected/1_Hz_3'
-    Filter = 0.5
+    fig_save = '/reports/figures/Voltaje_selected/1_Hz_6'
+    Filter = 0.9
 
     main(raw_path_1, fig_save, Filter) 

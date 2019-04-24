@@ -159,10 +159,10 @@ def main(raw_path, raw_path_1, file_save, n_rep, fig_save):
 #%%
 if __name__ == '__main__':
     
-    raw_path = '/data/Interim/1_Hz_3/*.csv'
-    raw_path_1 = '/data/Processed/1_Hz_3/*.csv'
-    file_save = '/data/processed/1_Hz_3'
+    raw_path = '/data/Interim/1_Hz_6/*.csv'
+    raw_path_1 = '/data/Processed/1_Hz_6/*.csv'
+    file_save = '/data/processed/1_Hz_6'
     n_rep = 5
-    fig_save = '/reports/figures/Voltaje/1_Hz_3'
+    fig_save = '/reports/figures/Voltaje/1_Hz_6'
 
     main(raw_path, raw_path_1, file_save, n_rep, fig_save) 

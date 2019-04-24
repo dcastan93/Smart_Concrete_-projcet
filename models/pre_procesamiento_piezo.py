@@ -20,29 +20,12 @@ import logging
 
 import pandas as pd
 import datetime as dt
-
+import csv
 import glob
-
-
-
-#%%
-#import logging
-#from logging.handlers import RotatingFileHandler
-#
-#file_name = 'preprocesamiento'
-#logger = logging.getLogger()
-#dir_log = os.path.join(base_path, f'models/loggers/{file_name}.log')
-#
-#handler = RotatingFileHandler(dir_log, maxBytes=2000000, backupCount=10)
-#logging.basicConfig(level=logging.DEBUG,
-#                    format="%(asctime)s - %(process)d - %(name)s - %(levelname)s - %(message)s",
-#                    handlers = [handler])
 
 
 #%%
 def main(raw_path, interim_path, n_rep, n_datos, raw_path_1):
-    
-    # en esta parte se cambia el nombre de los archivos y se ponen en la carpeta correspoondiente
     
     all_files = glob.glob(base_path + raw_path)
     read_csv = []
@@ -54,18 +37,11 @@ def main(raw_path, interim_path, n_rep, n_datos, raw_path_1):
         read_csv = []
         folder = all_files[contador:contador1]
         for i in folder:
-            
-        
-            file_name = str(i)
-            Folder_name = os.path.dirname(i)
-            path_list = Folder_name.split(os.sep)
-            name = path_list[7]
-            name = '/' + str(name)+'_'+ str(count)
-            save = '/' + path_list[6]
-            
-            folder_save = '/' +path_list[5]
-            df = (pd.read_csv(i))
-            df.to_csv(os.path.join(base_path + interim_path + folder_save + save + name +'.csv'),  index = False, sep=',')
+            break
+                   
+            df = pd.read_csv(i, sep=";", header=0, names=['Time', 'MDef', 'lambda'], usecols=['Time', 'MDef'])
+            df = df[54:len(df)+1]
+            df.to_csv(os.path.join(base_path + interim_path + fold er_save + save + name +'.csv'),  index = False, sep=',')
        
             count = count+1
         
@@ -73,7 +49,7 @@ def main(raw_path, interim_path, n_rep, n_datos, raw_path_1):
         contador1 = contador1 + n_rep
     
     
- # en esta parte se obliga a que se inicie en el ciclo positivo
+ 
     
 #    logger.info('seleccionando los archivos .csv')
     all_files = glob.glob(base_path + raw_path_1)
@@ -115,7 +91,6 @@ def main(raw_path, interim_path, n_rep, n_datos, raw_path_1):
         df.to_csv(os.path.join(file_save, os.path.basename(file_name)),  index = False, sep=',')
         
         
-        #aca se juntan todos los archivos
 
     all_files = glob.glob(base_path + raw_path_1)
     read_csv = []
@@ -147,8 +122,7 @@ def main(raw_path, interim_path, n_rep, n_datos, raw_path_1):
             else:
                 
                 df = df[0:len(read_csv)]
-                
-                read_csv = read_csv.join(df)
+                read_csv = read_csv.merge(df, left_index=True, right_index=True)
                 
             
             count = count+1
@@ -166,7 +140,7 @@ def main(raw_path, interim_path, n_rep, n_datos, raw_path_1):
 #%%
 if __name__ == '__main__':
     
-    raw_path = '/data/Interim/1_Hz_6/**/**/**/**/*.csv'
+    raw_path = '/data/Interim/Def_08_2/*.csv'
     raw_path_1 = '/data/Interim/1_Hz_6/**/**/*.csv'
     file = '1_Hz_6'
     interim_path = '/data/Interim/1_Hz_6'

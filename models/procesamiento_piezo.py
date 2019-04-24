@@ -42,8 +42,6 @@ import glob
 #%%
 def main(raw_path, interim_path, n_rep, n_datos, raw_path_1):
     
-    # en esta parte se cambia el nombre de los archivos y se ponen en la carpeta correspoondiente
-    
     all_files = glob.glob(base_path + raw_path)
     read_csv = []
     count = 0
@@ -55,7 +53,7 @@ def main(raw_path, interim_path, n_rep, n_datos, raw_path_1):
         folder = all_files[contador:contador1]
         for i in folder:
             
-        
+                   
             file_name = str(i)
             Folder_name = os.path.dirname(i)
             path_list = Folder_name.split(os.sep)
@@ -73,7 +71,7 @@ def main(raw_path, interim_path, n_rep, n_datos, raw_path_1):
         contador1 = contador1 + n_rep
     
     
- # en esta parte se obliga a que se inicie en el ciclo positivo
+ 
     
 #    logger.info('seleccionando los archivos .csv')
     all_files = glob.glob(base_path + raw_path_1)
@@ -115,7 +113,6 @@ def main(raw_path, interim_path, n_rep, n_datos, raw_path_1):
         df.to_csv(os.path.join(file_save, os.path.basename(file_name)),  index = False, sep=',')
         
         
-        #aca se juntan todos los archivos
 
     all_files = glob.glob(base_path + raw_path_1)
     read_csv = []
@@ -147,8 +144,7 @@ def main(raw_path, interim_path, n_rep, n_datos, raw_path_1):
             else:
                 
                 df = df[0:len(read_csv)]
-                
-                read_csv = read_csv.join(df)
+                read_csv = read_csv.merge(df, left_index=True, right_index=True)
                 
             
             count = count+1
