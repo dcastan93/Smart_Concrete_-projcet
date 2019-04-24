@@ -144,12 +144,12 @@ def main(raw_path, raw_path_1, file_save, n_rep, fig_save):
         
         df_mean.plot.box()
         plt.grid()
-        plt.ylabel('Impedancia (Ohm)')
-        plt.xlabel('% de onda')
+        plt.ylabel('Impedance (Ohm)')
+        plt.xlabel('Wave percentage')
         
         plt.xticks(rotation = 20 )
         plt.show()
-        plt.savefig(os.path.join(base_path + fig_save, Folder_name+'.pdf'), bbox_inches='tight')
+        plt.savefig(os.path.join(base_path + fig_save, Folder_name+'.svg'), bbox_inches='tight')
         plt.clf()
         plt.cla()
         plt.close() 
@@ -159,10 +159,10 @@ def main(raw_path, raw_path_1, file_save, n_rep, fig_save):
 #%%
 if __name__ == '__main__':
     
-    raw_path = '/data/Interim/1_Hz_6/*.csv'
-    raw_path_1 = '/data/Processed/1_Hz_6/*.csv'
-    file_save = '/data/processed/1_Hz_6'
+    raw_path = '/data/Interim/1_Hz_3/*.csv'
+    raw_path_1 = '/data/Processed/1_Hz_3/*.csv'
+    file_save = '/data/processed/1_Hz_3'
     n_rep = 5
-    fig_save = '/reports/figures/Voltaje/1_Hz_6'
+    fig_save = '/reports/figures/Voltaje/1_Hz_3'
 
     main(raw_path, raw_path_1, file_save, n_rep, fig_save) 

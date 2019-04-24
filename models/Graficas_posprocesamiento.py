@@ -63,8 +63,8 @@ def main( raw_path_1, fig_save, Filter):
         
         df_std = df_mean.std()
         df_std = round(df_std, 2)
-        text_1= 'Valor medio = ' + str(df_medio) + ' Ohm'
-        text_2= 'Desviación estandar = ' + str(df_std)+ ' Ohm'
+        text_1= 'Mean value= ' + str(df_medio) + ' Ohm'
+        text_2= 'Standar deviation = ' + str(df_std)+ ' Ohm'
     
         data = np.array([np.arange(1,len(df)+1)]).T    
 #        data = (pd.DataFrame(data))
@@ -77,14 +77,14 @@ def main( raw_path_1, fig_save, Filter):
         plt.plot(data, df_mean, color='steelblue')
         plt.plot(data,p(data),"r--")
         plt.grid()
-        plt.xlabel('tiempo (s)')
-        plt.ylabel('Impedancia (Ohm)')
+        plt.xlabel('time (s)')
+        plt.ylabel('Impedance (Ohm)')
 #        plt.text(8, 8, str(text_1) , fontsize=11)
 #        plt.text(0.5, 0.85, str(text_2) , fontsize=11)
         extra = Rectangle((0, 0), 1, 1, fc="w", fill=False, edgecolor='none', linewidth=0)
         plt.legend([extra, extra], (text_1,text_2 ))
         plt.show()
-        plt.savefig(os.path.join(base_path + fig_save, Folder_name+'.pdf'), bbox_inches='tight')
+        plt.savefig(os.path.join(base_path + fig_save, Folder_name+'.svg'), bbox_inches='tight')
         plt.clf()
         plt.cla()
         plt.close()
@@ -93,9 +93,9 @@ def main( raw_path_1, fig_save, Filter):
 #%%
 if __name__ == '__main__':
     
-    raw_path_1 = '/data/Processed/1_Hz_6/*.csv'
+    raw_path_1 = '/data/Processed/1_Hz_3/*.csv'
  
-    fig_save = '/reports/figures/Voltaje_selected/1_Hz_6'
-    Filter = 0.6
+    fig_save = '/reports/figures/Voltaje_selected/1_Hz_3'
+    Filter = 0.5
 
     main(raw_path_1, fig_save, Filter) 

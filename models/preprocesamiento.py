@@ -162,10 +162,10 @@ def main(raw_path, interim_path, n_rep, n_datos, raw_path_1):
 #%%
 if __name__ == '__main__':
     
-    raw_path = '/data/Interim/1_Hz_6/**/**/**/**/*.csv'
-    raw_path_1 = '/data/Interim/1_Hz_6/**/**/*.csv'
-    file = '1_Hz_6'
-    interim_path = '/data/Interim/1_Hz_6'
+    raw_path = '/data/Interim/1_Hz_7_70/**/**/**/**/*.csv'
+    raw_path_1 = '/data/Interim/1_Hz_7_70/**/**/*.csv'
+    file = '1_Hz_7_70'
+    interim_path = '/data/Interim/1_Hz_7_70'
     n_rep = 5
     n_datos = 25
 
